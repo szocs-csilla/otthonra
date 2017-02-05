@@ -7,5 +7,6 @@
 		<jta-data-source>java:jboss/datasources/UserRoleDS</jta-data-source>
 
 		<class>szocsc.user.role.jpa.User</class>
+		<class>szocsc.user.role.jpa.Role</class>
 	</persistence-unit>
 </persistence>
