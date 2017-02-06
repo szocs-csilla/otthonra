@@ -9,7 +9,7 @@ import szocsc.user.role.common.IRole;
 import szocsc.user.role.jpa.Role;
 
 public class RoleBean implements IRole {
-	@PersistenceContext(unitName = "user-role-jpa")
+	@PersistenceContext(unitName = "UserRole")
 	private EntityManager entityManager;
 
 	@SuppressWarnings("unchecked")

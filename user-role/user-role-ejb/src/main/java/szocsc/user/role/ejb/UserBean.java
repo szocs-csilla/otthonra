@@ -15,7 +15,7 @@ import szocsc.user.role.jpa.User;
 @Stateless
 public class UserBean implements IUser {
 
-	@PersistenceContext(unitName = "user-role-jpa")
+	@PersistenceContext(unitName = "UserRole")
 	private EntityManager entityManager;
 
 	@SuppressWarnings("unchecked")

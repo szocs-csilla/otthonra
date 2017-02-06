@@ -81,7 +81,12 @@
 				<version>0.0.1-SNAPSHOT</version>
 				<type>ejb</type>
 			</dependency>
-
+			<dependency>
+				<groupId>szocsc</groupId>
+				<artifactId>user-roles-web</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<type>war</type>
+			</dependency>
 			<dependency>
 				<groupId>szocsc</groupId>
 				<artifactId>user-role-ear</artifactId>
@@ -89,12 +94,7 @@
 				<type>ear</type>
 			</dependency>
 
-			<dependency>
-				<groupId>szocsc</groupId>
-				<artifactId>user-roles-web</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
-				<type>war</type>
-			</dependency>
+
 
 		</dependencies>
 

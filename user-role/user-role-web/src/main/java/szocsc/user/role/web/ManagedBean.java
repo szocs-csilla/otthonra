@@ -3,15 +3,26 @@ package szocsc.user.role.web;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import szocsc.user.role.common.IUser;
 import szocsc.user.role.jpa.User;
-
+@Named("user")
+@ApplicationScoped
 public class ManagedBean implements Serializable, IUser {
+	
+	private static final long serialVersionUID = 1L;
 	private List<User> listUser;
 	private IUser userBean;
+	
+
+	public ManagedBean() {
+		super();
+		System.out.println("letre jottem");
+	}
 
 	@Override
 	public List<User> getAllUser() {
@@ -58,9 +69,10 @@ public class ManagedBean implements Serializable, IUser {
 	private IUser getUserBean() {
 		if (userBean == null) {
 			try {
+				System.out.println("sfhadshfausehf");
 				InitialContext jndi = new InitialContext();
 				userBean = (IUser) jndi
-						.lookup("java:global/userManagement-EAR-0.0.1-SNAPSHOT/oser-role-ejb-0.0.1-SNAPSHOT/UserBean");
+						.lookup("java:global/user-role-ear-0.0.1-SNAPSHOT/user-role-ejb-0.0.1-SNAPSHOT/UserBean");
 			} catch (NamingException e) {
 				e.printStackTrace();
 			}

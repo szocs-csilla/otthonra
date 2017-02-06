@@ -15,17 +15,18 @@
 			<groupId>szocsc</groupId>
 			<artifactId>user-role-jpa</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>szocsc</groupId>
 			<artifactId>user-role-ejb</artifactId>
 			<type>ejb</type>
 		</dependency>
-
 		<dependency>
 			<groupId>szocsc</groupId>
 			<artifactId>user-role-common</artifactId>
 		</dependency>
+		
+
+
 
 		<dependency>
 			<groupId>szocsc</groupId>
