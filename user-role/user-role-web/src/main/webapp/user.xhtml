@@ -23,5 +23,15 @@
 		<br />
 		<h:commandButton value="Submit" action="#{user.addUser(newUser)}" />
 	</h:form>
+	<h3>Update user</h3>
+	<h:form>
+	Please input the old name for the user! <br />
+		<h:inputText value="#{oldName}" />
+		<br />
+		Please input the new name for the user! <br />
+		<h:inputText value="#{newName}" />
+		<br />
+		<h:commandButton value="Submit" action="#{user.modifyUser(oldName, newName)}" />
+	</h:form>
 </body>
 </html>

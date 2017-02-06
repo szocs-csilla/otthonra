@@ -47,7 +47,7 @@ public class UserBean implements IUser {
 		CriteriaQuery<User> criteriaQuery = builder.createQuery(User.class);
 		Root<User> userRoot = criteriaQuery.from(User.class);
 
-		criteriaQuery.select(userRoot).where(builder.equal(userRoot.get("name"), oldName));
+		criteriaQuery.select(userRoot).where(builder.equal(userRoot.get("username"), oldName));
 		User user = entityManager.createQuery(criteriaQuery).getSingleResult();
 		user.setUsername(newName);
 		return 0;
