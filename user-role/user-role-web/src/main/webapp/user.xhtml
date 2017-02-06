@@ -6,15 +6,16 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" /> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
 <title>users</title>
 </head>
 <body>
-<h3>users list</h3>
+	<h3>users list</h3>
 
-<ui:repeat value="#{user.getAllUser()}" var="value">
+	<ui:repeat value="#{user.getAllUser()}" var="value">
  #{value.id}  #{value.username} <br />
-	</ui:repeat><br/>
+	</ui:repeat>
+	<br />
 	<h3>Create new user</h3>
 	<h:form>
 	Please input name for the new user!
@@ -28,10 +29,18 @@
 	Please input the old name for the user! <br />
 		<h:inputText value="#{oldName}" />
 		<br />
-		Please input the new name for the user! <br />
+	Please input the new name for the user! <br />
 		<h:inputText value="#{newName}" />
 		<br />
-		<h:commandButton value="Submit" action="#{user.modifyUser(oldName, newName)}" />
+		<h:commandButton value="Submit"
+			action="#{user.modifyUser(oldName, newName)}" />
+	</h:form>
+	<h3>Delete existing user</h3>
+	<h:form>
+	Please input the id of the user! <br />
+		<h:inputText value="#{id}" />
+
+		<h:commandButton value="Submit" action="#{user.removeUser(id)}" />
 	</h:form>
 </body>
 </html>
