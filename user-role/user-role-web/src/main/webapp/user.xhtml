@@ -11,9 +11,9 @@
 </head>
 <body>
 <h3>users list</h3>
-#{user.getAllUser()}
-<ui:repeat value="#{user.almafa}" var="value">
- #{value.getId()}  #{value.username} <br />
-	</ui:repeat>
+
+<ui:repeat value="#{user.getAllUser()}" var="value">
+ #{value.id}  #{value.username} <br />
+	</ui:repeat><br/>
 </body>
 </html>
