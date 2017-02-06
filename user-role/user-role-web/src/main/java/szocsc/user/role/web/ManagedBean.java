@@ -37,6 +37,8 @@ public class ManagedBean implements Serializable, IUser {
 
 	@Override
 	public int addUser(String name) {
+		User newUser = new User();
+		newUser.setUsername(name);
 		getUserBean().addUser(name);
 		return 0;
 	}

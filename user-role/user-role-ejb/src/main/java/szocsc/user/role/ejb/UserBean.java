@@ -33,7 +33,9 @@ public class UserBean implements IUser {
 
 	@Override
 	public int addUser(String name) {
+		int number = ((Number) entityManager.createNamedQuery("User.countAll").getSingleResult()).intValue();
 		User user = new User();
+		user.setId(number);
 		user.setUsername(name);
 		entityManager.persist(user);
 		return 0;

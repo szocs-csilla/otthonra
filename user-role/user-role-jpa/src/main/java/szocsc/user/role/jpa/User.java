@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -17,11 +20,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "users")
-@NamedQuery(name = "User.findAll", query = "select u from User u")
+@NamedQueries({ @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
+	@NamedQuery(name = "User.countAll", query = "select count(u) +1 from User u") })
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id 
 	private int id;
 	private String username;
 
