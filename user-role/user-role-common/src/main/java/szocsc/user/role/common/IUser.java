@@ -2,6 +2,7 @@ package szocsc.user.role.common;
 
 import java.util.List;
 
+import szocsc.user.role.jpa.Role;
 import szocsc.user.role.jpa.User;
 
 public interface IUser {
@@ -23,11 +24,18 @@ public interface IUser {
 	 */
 	public int addUser(String name);
 	/**
+	 * This method add role to user.
+	 * @param role
+	 * @return role
+	 */
+	public int addRole(String name, List<Role>roles);
+	/**
 	 * This method updates user by name
 	 * @param oldName
 	 * @param newName
 	 * @return
 	 */
+	
 	public int modifyUser(String oldName, String newName);
 	/**
 	 * This method deletes the User by its id.

@@ -11,9 +11,8 @@
 </head>
 <body>
 	<h3>users list</h3>
-
 	<ui:repeat value="#{user.getAllUser()}" var="value">
- #{value.id}  #{value.username} <br />
+	 #{value.id}  #{value.username} <br />
 	</ui:repeat>
 	<br />
 	<h3>Create new user</h3>
@@ -35,12 +34,35 @@
 		<h:commandButton value="Submit"
 			action="#{user.modifyUser(oldName, newName)}" />
 	</h:form>
-	<h3>Delete existing user</h3>
+	<h3>Delete user</h3>
 	<h:form>
 	Please input the id of the user! <br />
 		<h:inputText value="#{id}" />
 
 		<h:commandButton value="Submit" action="#{user.removeUser(id)}" />
 	</h:form>
+	<h3>Search for user by name</h3>
+	<h:form>
+	Please input the name! <br />
+		<h:inputText binding="#{name}" />
+		<h:commandButton value="Submit"
+			action="#{user.getUserByName(name.value)}" />
+
+	</h:form>
+	<h:outputText value="#{user.listUser}" />
+	<h3>Set user roles</h3>
+	<h:form>
+	<h:inputText id="setRole" binding="#{setRoleForName}" />
+			<h:message for="setRole" />
+			<h:selectManyCheckbox id="roles" binding="#{selectedRoles}">
+				<f:selectItems value="#{role.getAllRole()}" var="mRole"
+					itemLabel="#{mRole.role}" itemValue="#{mRole.id},#{mRole.role}" />
+			</h:selectManyCheckbox>
+			<h:commandButton value="Set"
+				action="#{user.setRole(setRoleForName.value,selectedRoles.value)}" /> 
+	</h:form>
+
+
+
 </body>
 </html>

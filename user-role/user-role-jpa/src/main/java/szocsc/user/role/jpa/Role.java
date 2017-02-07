@@ -4,24 +4,21 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the roles database table.
  * 
  */
 @Entity
-@Table(name="roles")
-@NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
+@Table(name = "roles")
+@NamedQueries({ @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r"),
+		@NamedQuery(name = "Role.countAll", query = "select max(r.id)+1 from Role r") })
 public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
 	private int id;
-
 	private String role;
-
-	//bi-directional many-to-many association to User
-	@ManyToMany(mappedBy="roles")
+	@ManyToMany(cascade=CascadeType.ALL,mappedBy = "roles")
 	private List<User> users;
 
 	public Role() {
@@ -51,4 +48,9 @@ public class Role implements Serializable {
 		this.users = users;
 	}
 
+	@Override
+	public String toString() {
+		return "Role [id = " + Integer.toString(id) + "; type = " + role + "]";
+
+	}
 }

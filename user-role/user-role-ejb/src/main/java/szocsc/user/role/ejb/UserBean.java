@@ -1,5 +1,6 @@
 package szocsc.user.role.ejb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -10,6 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import szocsc.user.role.common.IUser;
+import szocsc.user.role.jpa.Role;
 import szocsc.user.role.jpa.User;
 
 @Stateless
@@ -17,7 +19,7 @@ public class UserBean implements IUser {
 
 	@PersistenceContext(unitName = "UserRole")
 	private EntityManager entityManager;
-
+	List<Role> roles = new ArrayList<Role>();
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getAllUser() {
@@ -37,7 +39,10 @@ public class UserBean implements IUser {
 		User user = new User();
 		user.setId(number);
 		user.setUsername(name);
+		user.setRoles(roles);
 		entityManager.persist(user);
+		entityManager.flush();
+		entityManager.clear();
 		return 0;
 	}
 
@@ -67,10 +72,21 @@ public class UserBean implements IUser {
 		CriteriaQuery<User> criteriaQuery = builder.createQuery(User.class);
 		Root<User> userRoot = criteriaQuery.from(User.class);
 		
-		criteriaQuery.select(userRoot).where(builder.like(userRoot.get("name"), "%" + name + "%"));
+		criteriaQuery.select(userRoot).where(builder.like(userRoot.get("username"), "%" + name + "%"));
 		List<User> users = entityManager.createQuery(criteriaQuery).getResultList();
 		return users;
 		
+	}
+
+	@Override
+	public int addRole(String name, List<Role> roles) {
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<User> criteriaQuery = builder.createQuery(User.class);
+		Root<User> userRoot = criteriaQuery.from(User.class);
+		criteriaQuery.select(userRoot).where(builder.equal(userRoot.get("username"),name));
+		User user = entityManager.createQuery(criteriaQuery).getSingleResult();
+		user.setRoles(roles);
+		return 0;
 	}
 
 }

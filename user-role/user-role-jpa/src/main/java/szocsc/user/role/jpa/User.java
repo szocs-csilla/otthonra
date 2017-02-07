@@ -1,9 +1,12 @@
 package szocsc.user.role.jpa;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,8 +24,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users")
 @NamedQueries({ @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-	@NamedQuery(name = "User.countAll", query = "select count(u) +1 from User u") })
+	@NamedQuery(name = "User.countAll", query = "select max(u.id) +1 from User u") })
 public class User implements Serializable {
+	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id 
@@ -30,14 +35,15 @@ public class User implements Serializable {
 	private String username;
 
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "users_roles", 
-		joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"), 
-		inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+		joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), 
+		inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
 	)
 	private List<Role> roles;
 
 	public User() {
+		roles = new ArrayList<Role>();
 	}
 
 	public int getId() {
@@ -63,5 +69,12 @@ public class User implements Serializable {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id = " + Integer.toString(id) + "; name = " + username + " " + roles.toString() + " ]";
+	}
+	
+	
 
 }

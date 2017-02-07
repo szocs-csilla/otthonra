@@ -1,6 +1,7 @@
 package szocsc.user.role.web;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -9,19 +10,20 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import szocsc.user.role.common.IUser;
+import szocsc.user.role.jpa.Role;
 import szocsc.user.role.jpa.User;
+
 @Named("user")
 @ApplicationScoped
 public class ManagedBean implements Serializable, IUser {
-	
+
 	private static final long serialVersionUID = 1L;
 	private List<User> listUser;
 	private IUser userBean;
-	
 
 	public ManagedBean() {
 		super();
-		System.out.println("letre jottem");
+
 	}
 
 	@Override
@@ -58,8 +60,10 @@ public class ManagedBean implements Serializable, IUser {
 	@Override
 	public List<User> getUserByName(String name) {
 		listUser = getUserBean().getUserByName(name);
+		System.out.println(listUser.size());
 		return listUser;
 	}
+
 	public List<User> getListUser() {
 		return listUser;
 	}
@@ -81,6 +85,30 @@ public class ManagedBean implements Serializable, IUser {
 		}
 		return userBean;
 
+	}
+
+	@Override
+	public int addRole(String name, List<Role> roles) {
+
+		getUserBean().addRole(name, roles);
+		return 0;
+	}
+
+	public String setRole(String name, String[] roles) {
+
+		List<Role> rolesList = new ArrayList<>();
+
+		for (String r : roles) {
+			String[] cut = r.split(",");
+			Role newRole = new Role();
+			newRole.setId(new Integer(cut[0]));
+			newRole.setRole(cut[1]);
+
+			rolesList.add(newRole);
+		}
+
+		addRole(name, rolesList);
+		return null;
 	}
 
 }

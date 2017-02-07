@@ -9,7 +9,7 @@ public interface IRole {
 	 * This function gets all the Roles from DB.
 	 * @return roles
 	 */
-	public List<Role>getAllRols();
+	public List<Role>getAllRole();
 	/**
 	 * This method searches for a Role with the specified id.
 	 * @param id
